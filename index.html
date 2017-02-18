@@ -129,6 +129,7 @@
 <p>这里要<strong>注意</strong>几点：</p>
 <ul>
 <li>上面链接中的<code>node.js</code>的版本最好在官网上下载 <strong>4.0.0</strong>（好像）以上的版本，不然<strong>淘宝NPM镜像</strong>步骤会失败</li>
+<li><strong>记得如果是用的上面文章中的淘宝镜像。 <code>npm</code> 以后都要改成 <code>cnpm</code> 来使用</strong> （非常重要！）</li>
 <li>Github的<strong>账号</strong>跟你要申请的博客的域名（<strong>xxx</strong>.github.io）黑体部分必须一致。否则博客会打不开，显示<strong>404</strong></li>
 </ul>
 <h2 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h2><p>当然这里你也可以用原来默认的官方主题<code>Landscape</code>.<br>这里给<strong>想换的朋友</strong>一个知乎上的问题链接 <a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">有哪些好看的 Hexo 主题？</a><br>我个人用的是其中很老的一个主题 <a href="https://github.com/hexojs/hexo-theme-light" target="_blank" rel="external">Light</a> . 很简约，我个人比较喜欢。</p>
@@ -143,7 +144,8 @@
 <h3 id="主标题下方加分割线"><a href="#主标题下方加分割线" class="headerlink" title="主标题下方加分割线"></a>主标题下方加分割线</h3><p>加上线以便区分<strong>标题</strong>和<strong>正文</strong>。<br>路径跟上一步一致：<code>\themes\hexo-theme-light-master\source\css\_partial\article.styl</code><br>使用<code>ctrl+f</code>找到<code>header</code> 然后稍微往下拉一点，找到<code>.title</code> 在<code>font-weight normal</code>下加两行代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">padding-bottom 15px</div><div class="line">border-bottom: 4px solid color-border</div></pre></td></tr></table></figure></p>
 <p>其中<code>border-bottom:</code>后的像素数据可以控制线的<strong>粗细</strong></p>
 <h3 id="设置多层分类"><a href="#设置多层分类" class="headerlink" title="设置多层分类"></a>设置多层分类</h3><p>如果要想博客写的有条理。博客中的每篇文章都应该有它的<strong>分类</strong>。一个大类里面还应该有多个小类。即为多层分类。<br>在<code>Light</code>主题中自带的分类只有单层的。无法表示出层次感。这里我也给一个链接 <a href="http://www.jianshu.com/p/e6e54389c88f" target="_blank" rel="external">Hexo主题中实现多级分类</a><br>大家可以按照这篇文章，设计自己的分类效果。</p>
-<p>暂时先这样，接下来的部分下次更新..</p>
+<h3 id="添加Latex公式效果"><a href="#添加Latex公式效果" class="headerlink" title="添加Latex公式效果"></a>添加Latex公式效果</h3><p>技术类的博客肯定少不了公式的，所以安装上<code>Latex</code>还是很有必要的。<br><a href="http://blog.csdn.net/emptyset110/article/details/50123231" target="_blank" rel="external">搭建一个支持LaTEX的hexo博客</a><br>（记得如果是用的上面文章中的淘宝镜像。<code>npm</code> 记得改成 <code>cnpm</code>）</p>
+<p><strong>暂时先这样，接下来的部分下次更新..</strong></p>
 
       
     </div>
