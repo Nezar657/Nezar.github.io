@@ -3,13 +3,19 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Nezar&#39;s Nest</title>
+  <title>hexo] Light主题的修改使用 | Nezar&#39;s Nest</title>
   <meta name="author" content="Nezar">
+  
+  <meta name="description" content="（更新ing..）（文中出现各类链接均来自搜索引擎。侵删）
+使用hexo搭建博客博客搭建在Github上，地址是 Nezar’s Nest . 搭建的过程参考零基础免费搭建个人博客-hexo+github
+这里要注意几点：
+
+上面链接中的node.js的版本最好在官网上下载 4.0.0（好像）以上的">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="hexo] Light主题的修改使用"/>
   <meta property="og:site_name" content="Nezar&#39;s Nest"/>
 
   
@@ -43,72 +49,7 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-02-18T18:41:25.000Z"><a href="/2017/02/19/暴力-模拟-2017-02-19-codeforces398D2B/">2017-02-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/02/19/暴力-模拟-2017-02-19-codeforces398D2B/">codeforces] #398(Div.2) B. The Queue [模拟]</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>链接：<a href="http://codeforces.com/problemset/problem/767/B" target="_blank" rel="external">Codeforces Round #398 (Div. 2) B. The Queue</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>Vasya 这个人终于成年了。有一天，他想去办个护照<del>（年龄到了就想出去浪）</del>。说做咱就做，他决定明天就去办事处搞点事情。</p>
-<p>但是问题就出现了，办证这种事情一看就会有很多人，哪个时候去可以少排一会儿队呢？</p>
-<p>Vasya决定将偷懒进行到底，先是弄来了办事处的<strong>开门时间</strong> $t_s$ ，<strong>关门时间</strong> $t_f$ 和<strong>为每个客户服务需要消耗的时间</strong> $e_t$（这里假设每个客户需要的时间相同）。然后他又通过特殊渠道得知了明天<strong>会有 $n$ 个客户</strong>，以及<strong>每个客户来的具体时间 $n_t$ </strong></p>
-<p>补充：</p>
-<ol>
-<li>Vasya和其他客户到达办事处的时间点均为整点。</li>
-<li>当Vasya和其他人同时到达时，Vasya会表现出他的绅士风度，让其他人排在他前面</li>
-<li>工作人员反应很快，一旦有人来就会马上开始工作</li>
-<li>如果给的数据有多个答案，只需给出其中任意一个答案</li>
-<li>Vasya在明天必须拿到护照</li>
-</ol>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题意描述应该非常清晰了，但这个题目里面所包含的各种特殊情况在比赛的时候不是那么容易考虑得到。<br>所有的情况大概有以下几点：</p>
-<ol>
-<li>来的人不是很多或者工作效率很高，在整个工作时间内有那么一个时刻工作人员在玩手机</li>
-<li>办事处还没开门，但早就有围观群众到场了</li>
-<li>虽然来了很多人，但是大家都睡过了头，在关门之后才到</li>
-<li>人满为患，这一天都有很多人没能办成功的</li>
-</ol>
-<p>1 和 3 应该是比较简单的，直接找一个空闲的时间作为答案就可以了。相比较而言比较麻烦的是 2 和 4 。<br>2 和 4 需要在各个客户之间的时间进行比较判断，才能寻得最优解。<br>当然这四个都不是难的，结合起来更麻烦。</p>
-<p><strong>下面就说一下我的思路：</strong></p>
-<p>最优解就在 <strong>空闲时间</strong> 和 <strong>某个客户来之前一分钟的那个时间（$n_t-1$）</strong> 其中一个。</p>
-<p>空闲时间就不解释了。根本不用等啊。<br>（但是一定要保证到关门之前有充足的时间来办护照哦，即$t+e_t&lt;t_f$）</p>
-<p>后面那个的话就是</p>
-<ol>
-<li><strong>把本来可以排最少时间的客户挤掉，代替他的位置。</strong>（这样你就必须比他早来）</li>
-<li><strong>尽可能地不在前面的人身上浪费时间。</strong>（只要早一分钟来）</li>
-</ol>
-<p>然后这个问题就变成了求<strong>哪个客户等的时间最短</strong>的问题<br>（分别求出他们离开的时间就行了）<br>（总共就$10^6$的客户，都遍历一遍也没问题）</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">typedef</span> __int64 LL;</div><div class="line"></div><div class="line">LL nt[<span class="number">100005</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    LL ts,tf,et;</div><div class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%I64d%I64d%I64d"</span>,&amp;ts,&amp;tf,&amp;et))&#123;</div><div class="line">        <span class="keyword">int</span> n;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>,&amp;nt[i]);</div><div class="line">        &#125;</div><div class="line">        LL t=ts,ans=nt[<span class="number">1</span>]<span class="number">-1</span>;</div><div class="line">        LL low=t-nt[<span class="number">1</span>]+<span class="number">1</span>;   <span class="comment">//最少消耗的时间</span></div><div class="line">        <span class="keyword">if</span>(ans+et&gt;tf)&#123;</div><div class="line">            ans=ts;</div><div class="line">            t=tf+<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> f=<span class="number">0</span>;    <span class="comment">//判断是否有空闲时间</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n&amp;&amp;t&lt;=tf;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(nt[i]&gt;t)&#123;</div><div class="line">                ans=t;</div><div class="line">                f=<span class="number">1</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(i&gt;<span class="number">1</span>)&#123;</div><div class="line">                LL l=t-nt[i]+<span class="number">1</span>; <span class="comment">//当前客户消耗的时间</span></div><div class="line">                <span class="keyword">if</span>(l&lt;low)&#123;</div><div class="line">                    ans=nt[i]<span class="number">-1</span>;</div><div class="line">                    low=l;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            t+=et;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(f)   <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>,ans);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>((t&lt;tf)&amp;&amp;((t+et)&lt;=tf))   <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>,t);</div><div class="line">        <span class="keyword">else</span>    <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>,ans);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>由于这个题目考虑的点比较多且繁琐（在比赛的时候我真的这样觉得！）所以就收录下来了<del>（其实是个水题）</del><br>针对模拟类的题目自己不是特别敏感，写一下也加深印象。</p>
-<p>如果有更好的方法或者我有什么不足或者有什么值得探讨的东西的话，可以评论或者联系我。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
@@ -118,7 +59,7 @@
       
       
   
-    <h1 class="title"><a href="/2017/02/02/杂-blog-2017-02-02-Decorate/">hexo] Light主题的修改使用</a></h1>
+    <h1 class="title">hexo] Light主题的修改使用</h1>
   
 
     </header>
@@ -152,7 +93,49 @@
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/杂/">杂</a>, <a href="/categories/杂/blog/">blog</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/blog/">blog</a>, <a href="/tags/hexo/">hexo</a>, <a href="/tags/node-js/">node.js</a>
+  </div>
+
+        <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina"></a>
+    <a href="#" class="bds_tqq" data-cmd="tqq"></a>
+    <a href="#" class="bds_renren" data-cmd="renren"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin"></a>
+</div>
+
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "16"
+        },
+        "share": {},
+        "image": {
+            "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
+            "viewText": “分享到",
+            "viewSize": "16"
+        },
+        "selectShare": {
+            "bdContainerClass": null,
+            "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+        }
+    };
+    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
       
       <div class="clearfix"></div>
     </footer>
@@ -160,71 +143,27 @@
 </article>
 
 
+<section id="comment">
+  <h1 class="title">留言</h1>
 
-
-  <article class="post">
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-02-01T18:19:08.000Z"><a href="/2017/02/02/杂-个人-2017-02-02-Beginning/">2017-02-02</a></time>
-      
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://nezar657.github.io/2017/02/02/杂-blog-2017-02-02-Decorate/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
-    <h1 class="title"><a href="/2017/02/02/杂-个人-2017-02-02-Beginning/">Beginning</a></h1>
-  
+</section>
 
-    </header>
-    <div class="entry">
-      
-        <h1 id="All-things-are-difficult-before-they-are-easy"><a href="#All-things-are-difficult-before-they-are-easy" class="headerlink" title="All things are difficult before they are easy."></a>All things are difficult before they are easy.</h1><p><strong>万事开头难。</strong>我把它放在我的第一篇正式公开博客的最前面，不只是给我也给来到我的博客的人看。加油 (๑•̀ㅂ•́)و✧</p>
-<h2 id="为什么要写博客？"><a href="#为什么要写博客？" class="headerlink" title="为什么要写博客？"></a>为什么要写博客？</h2><p>很多人可能都会问这个问题。写博客明明需要花费很多时间，为什么又要花这么多时间去制作一篇或者几篇博客呢。</p>
-<p>在我看来，写博客既不浪费时间反而有很多<strong>好处</strong>：</p>
-<ul>
-<li>巩固刚掌握的知识</li>
-<li>对各个方法加深印象</li>
-<li>方便以后再次复习</li>
-<li>在写博客的过程中又能有更多的思路</li>
-<li>分享我的思路以便与他人探讨，相互促进<del>（如果真的有人看的话）</del></li>
-<li>…</li>
-</ul>
-<p>不得不说写博客有太多好处，有很多我可能还没有注意到。但从此刻起，我也正式放弃了只在电脑或者云端中存着代码的习惯。</p>
-<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>我的博客的话，大部分应该是关于<strong>算法</strong>，相对来说会比较<strong>杂</strong>。因为还是一个<em>在读本科生</em>，所以可能会穿插一些<strong>课堂作业</strong>等。</p>
-<p>总而言之，这个博客会与我的<strong>近期学习的方面</strong>相关。（毕竟还是自己的博客啊）</p>
-<p>大致会是：</p>
-<ul>
-<li><strong>各类算法</strong></li>
-<li><strong>各类代码语言</strong></li>
-<li><strong>慢慢学做游戏</strong></li>
-<li><strong>各类课程内容</strong></li>
-<li><strong>…</strong></li>
-</ul>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><del>（其实我非常怀疑在这个位置留各类联系方式的作用！）</del></p>
-<p>如果有希望跟我交流的可以加企鹅 <strong>591494381</strong></p>
-<p>喜欢的话点个关注吧！￣O￣)ノ</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-<nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav></div></div>
+</div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//baidu.com/search" method="get" accept-charset="utf-8">
