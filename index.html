@@ -50,11 +50,54 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-04-05T14:10:22.000Z"><a href="/2017/04/05/暴力-模拟-2017-04-05-2017-04-05-PAT-B-1001/">2017-04-05</a></time>
+        <time datetime="2017-04-05T15:19:23.000Z"><a href="/2017/04/05/字符串处理-2017-04-05-PAT-B-1002/">2017-04-05</a></time>
       
       
   
-    <h1 class="title"><a href="/2017/04/05/暴力-模拟-2017-04-05-2017-04-05-PAT-B-1001/">PAT-B] 1001. 害死人不偿命的(3n+1)猜想</a></h1>
+    <h1 class="title"><a href="/2017/04/05/字符串处理-2017-04-05-PAT-B-1002/">PAT-B-1002</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1002" target="_blank" rel="external">1002. 写出这个数(20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>输入一个整数 n 。<br>计算 n 的每一位的相加的和 sum<br>以拼音的方式顺位输出</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>首先，这个 n 范围很大.. <strong>小于 $10^{100}$</strong> 。<br>也就是说这个 n <strong>最大</strong>可以取到 $10^{100} - 1$ 。<br>所以先定位到<strong>字符串处理问题</strong>。（虽然可以不用字符串，用轻松的方法来写。详见代码）</p>
+<p>如果用字符来存储某一位数字的话，在计算 sum 的时候就要注意 <strong>- ‘0’</strong>。不减的话可以要犯大错误的。</p>
+<p>算完 sum 之后 输出每一位数字的拼音的时候。要注意两点 :</p>
+<ol>
+<li>拼音要高位先输出，之间有空格最后没空格</li>
+<li>拼音要学好  (・-・*)</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">char</span>* py[<span class="number">10</span>]=&#123; <span class="string">"ling"</span>, <span class="string">"yi"</span>, <span class="string">"er"</span>, <span class="string">"san"</span>, <span class="string">"si"</span>, <span class="string">"wu"</span>, <span class="string">"liu"</span>, <span class="string">"qi"</span>, <span class="string">"ba"</span>, <span class="string">"jiu"</span> &#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> n;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%c"</span>, &amp;n ) &amp;&amp; n != <span class="string">'\n'</span> )&#123;</div><div class="line">        sum += n - <span class="string">'0'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">stack</span>&lt; <span class="keyword">int</span> &gt; stk;</div><div class="line">    <span class="keyword">while</span>( sum )&#123;</div><div class="line">        stk.push( sum % <span class="number">10</span> );</div><div class="line">        sum /= <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>( <span class="string">"%s"</span>, py[ stk.top() ] );</div><div class="line">    stk.pop();</div><div class="line">    <span class="keyword">while</span>( stk.size() )&#123;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">" %s"</span>, py[ stk.top() ] );</div><div class="line">        stk.pop();</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>用上stack写起来比较简单..</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-04-05T14:10:22.000Z"><a href="/2017/04/05/暴力-模拟-2017-04-05-PAT-B-1001/">2017-04-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/04/05/暴力-模拟-2017-04-05-PAT-B-1001/">PAT-B] 1001. 害死人不偿命的(3n+1)猜想</a></h1>
   
 
     </header>
@@ -288,7 +331,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li></ul> 
 </div>
 
 </aside>
