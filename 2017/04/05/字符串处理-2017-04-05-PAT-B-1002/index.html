@@ -3,7 +3,7 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>PAT-B] 1002. 写出这个数 | Nezar&#39;s Nest</title>
+  <title>PAT-B] 1002. 写出这个数 [字符串处理] | Nezar&#39;s Nest</title>
   <meta name="author" content="Nezar">
   
   <meta name="description" content="链接：1002. 写出这个数(20)
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="PAT-B] 1002. 写出这个数"/>
+  <meta property="og:title" content="PAT-B] 1002. 写出这个数 [字符串处理]"/>
   <meta property="og:site_name" content="Nezar&#39;s Nest"/>
 
   
@@ -57,7 +57,7 @@
       
       
   
-    <h1 class="title">PAT-B] 1002. 写出这个数</h1>
+    <h1 class="title">PAT-B] 1002. 写出这个数 [字符串处理]</h1>
   
 
     </header>
@@ -74,6 +74,7 @@
 </ol>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">char</span>* py[<span class="number">10</span>]=&#123; <span class="string">"ling"</span>, <span class="string">"yi"</span>, <span class="string">"er"</span>, <span class="string">"san"</span>, <span class="string">"si"</span>, <span class="string">"wu"</span>, <span class="string">"liu"</span>, <span class="string">"qi"</span>, <span class="string">"ba"</span>, <span class="string">"jiu"</span> &#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> n;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%c"</span>, &amp;n ) &amp;&amp; n != <span class="string">'\n'</span> )&#123;</div><div class="line">        sum += n - <span class="string">'0'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">stack</span>&lt; <span class="keyword">int</span> &gt; stk;</div><div class="line">    <span class="keyword">while</span>( sum )&#123;</div><div class="line">        stk.push( sum % <span class="number">10</span> );</div><div class="line">        sum /= <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>( <span class="string">"%s"</span>, py[ stk.top() ] );</div><div class="line">    stk.pop();</div><div class="line">    <span class="keyword">while</span>( stk.size() )&#123;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">" %s"</span>, py[ stk.top() ] );</div><div class="line">        stk.pop();</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>用上stack写起来比较简单..</p>
+<p>//</p>
 
       
     </div>
@@ -170,7 +171,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">1</span></li></ul> 
 </div>
 
 </aside>
