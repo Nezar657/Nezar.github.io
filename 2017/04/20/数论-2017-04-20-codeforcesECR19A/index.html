@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>codeforces] ECR19 A. k-Factorization [数论] | Nezar&#39;s Nest</title>
+  <meta name="author" content="Nezar">
+  
+  <meta name="description" content="链接：Codeforces Educational Codeforces Round 19 A. k-Factorization
+题意给你两个正整数 n, k。
+判断是否存在k个数相乘，使其乘积等于n。如果不存在，输出-1。如果存在，再以任何你喜欢的顺序输出这k个数。（当然他们之间应以空格分隔）
+分">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="codeforces] ECR19 A. k-Factorization [数论]"/>
+  <meta property="og:site_name" content="Nezar&#39;s Nest"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Nezar&#39;s Nest" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Nezar&#39;s Nest</a></h1>
+  <h2><a href="/">To get a foot in the door</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-04-19T16:21:16.000Z"><a href="/2017/04/20/数论-2017-04-20-codeforcesECR19A/">2017-04-20</a></time>
+      
+      
+  
+    <h1 class="title">codeforces] ECR19 A. k-Factorization [数论]</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="http://codeforces.com/contest/797/problem/A" target="_blank" rel="external">Codeforces Educational Codeforces Round 19 A. k-Factorization</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给你两个正整数 <code>n, k</code>。</p>
+<p>判断是否存在<code>k</code>个数相乘，使其乘积等于<code>n</code>。<br>如果不存在，输出<code>-1</code>。<br>如果存在，再以任何你喜欢的顺序输出这<code>k</code>个数。<br>（当然他们之间应以空格分隔）</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题目不难，应该有很多种方法解答这个问题。</p>
+<p>我直接说一下我的思路：</p>
+<p>既然要得到<code>k</code>个数相乘，那么这<code>k</code>个数肯定是尽量<strong>越小越好</strong>。<br>（比如<code>n</code>能被<code>6</code>整除，那尽量把<code>6</code>拆成<code>2</code>和<code>3</code>。）<br>这里面有点<strong>贪心</strong>的感觉。因为如果剩下的<code>n</code>越大，那满足<code>k</code>个数的概率也就越大。</p>
+<p>所以这道题我直接从<code>2</code>开始循环判断是否能够做<code>n</code>的因子。<br>如果可以就直接存下来，<code>n</code>除去当前因子，然后继续判断这个因子。<br>如果不行，那再判断他的后一个（<code>新因子 = 因子+1</code>）</p>
+<p>依次这样判断，直到找不到因子了或者已经够个数了为止。</p>
+<p>（当已经找到<code>k-1</code>个因子时，就可以直接把剩下的<code>n</code>当做最后一个数，而不用继续做下去了。）</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> n, k;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d %d"</span>, &amp;n, &amp;k ) )&#123;</div><div class="line">        <span class="built_in">vector</span>&lt; <span class="keyword">int</span> &gt; ans;  <span class="comment">//用来存这k个数</span></div><div class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;  <span class="comment">//保存当前因子个数</span></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++ )&#123;</div><div class="line">            <span class="keyword">if</span>( n % i == <span class="number">0</span> )&#123;   <span class="comment">//若能整除则存下来</span></div><div class="line">                <span class="keyword">if</span>( ++j == k )&#123; <span class="comment">//已经存够k-1个数，则直接存入剩下的n</span></div><div class="line">                    ans.push_back( n );</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                n /= i;</div><div class="line">                ans.push_back( i );</div><div class="line">                i--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>( j != k )    <span class="built_in">puts</span>( <span class="string">"-1"</span> );</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">int</span> sz = ans.size();</div><div class="line">            <span class="built_in">printf</span>( <span class="string">"%d"</span>, ans[ <span class="number">0</span> ] );</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sz; i++ )&#123;</div><div class="line">                <span class="built_in">printf</span>( <span class="string">" %d"</span>, ans[ i ] );</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>毕竟签到题，比较得简单，如果大家有更简单的方法可以留言或者Q我。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数论/">数论</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/codeforces/">codeforces</a>, <a href="/tags/数论/">数论</a>
+  </div>
+
+        <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina"></a>
+    <a href="#" class="bds_tqq" data-cmd="tqq"></a>
+    <a href="#" class="bds_renren" data-cmd="renren"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin"></a>
+</div>
+
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "16"
+        },
+        "share": {},
+        "image": {
+            "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
+            "viewText": “分享到",
+            "viewSize": "16"
+        },
+        "selectShare": {
+            "bdContainerClass": null,
+            "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+        }
+    };
+    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://nezar657.github.io/2017/04/20/数论-2017-04-20-codeforcesECR19A/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:nezar657.github.io">
+  </form>
+</div>
+
+  <div class="widget tag">
+	<h3 class="title">友情链接</h3>
+	<ul class="entry">
+		<li><a href="http://blog.csdn.net/nezar" title="Nezar" target="_blank">我的 CSDN</a></li>
+		<li><a href="http://blog.csdn.net/whklhhhh" title="银耳" target="_blank">王子昂的 CSDN</a></li>
+	</ul>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Nezar
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js
+"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>
