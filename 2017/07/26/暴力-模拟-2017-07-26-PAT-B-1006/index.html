@@ -3,24 +3,22 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>PAT-B] 1001. 害死人不偿命的(3n+1)猜想 [模拟] | Nezar&#39;s Nest</title>
+  <title>PAT-B-1006 | Nezar&#39;s Nest</title>
   <meta name="author" content="Nezar">
   
-  <meta name="description" content="链接：1001. 害死人不偿命的(3n+1)猜想 (15)
-题意非常简单的数论模拟。
-输入一个 n :
+  <meta name="description" content="链接：1006. 换个格式输出整数 (15)
+题意给一个小于1000的正整数，按照以下格式输出：
 
-判断这个数 n 的奇偶性
-奇数  -:  n = ( 3 * n + 1 ) / 2
-偶数  -:  n = n / 2
-不断地重复，直到 n = 1 停止。输出重复了几次
+个位数：从1开始按顺序输出直到等于个位数为止（如个位数为7，则输出1234567）
+十位数：按十位数的大小输出相应数量的 S
+百位数：按百位数的大小输出相应数量的 B
 
-分析其实都不用分析">
+则，如果给一个两位数43，我们">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="PAT-B] 1001. 害死人不偿命的(3n+1)猜想 [模拟]"/>
+  <meta property="og:title" content="PAT-B-1006"/>
   <meta property="og:site_name" content="Nezar&#39;s Nest"/>
 
   
@@ -60,28 +58,27 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-04-05T14:10:22.000Z"><a href="/2017/04/05/暴力-模拟-2017-04-05-PAT-B-1001/">2017-04-05</a></time>
+        <time datetime="2017-07-26T15:36:55.000Z"><a href="/2017/07/26/暴力-模拟-2017-07-26-PAT-B-1006/">2017-07-26</a></time>
       
       
   
-    <h1 class="title">PAT-B] 1001. 害死人不偿命的(3n+1)猜想 [模拟]</h1>
+    <h1 class="title">PAT-B-1006</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1001" target="_blank" rel="external">1001. 害死人不偿命的(3n+1)猜想 (15)</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>非常简单的数论模拟。</p>
-<p>输入一个 n :</p>
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1006" target="_blank" rel="external">1006. 换个格式输出整数 (15)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给一个小于1000的正整数，按照以下格式输出：</p>
 <ol>
-<li>判断这个数 n 的奇偶性</li>
-<li>奇数  -:  n = ( 3 * n + 1 ) / 2</li>
-<li>偶数  -:  n = n / 2</li>
-<li>不断地重复，直到 n = 1 停止。输出重复了几次</li>
+<li>个位数：从<code>1</code>开始按顺序输出直到<strong>等于</strong>个位数为止<br>（如个位数为<code>7</code>，则输出<code>1234567</code>）</li>
+<li>十位数：按十位数的大小输出相应数量的 <strong>S</strong></li>
+<li>百位数：按百位数的大小输出相应数量的 <strong>B</strong></li>
 </ol>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>其实都不用分析了…<br>只要按照题意去循环就好了</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">solve</span><span class="params">( <span class="keyword">long</span> <span class="keyword">long</span> n )</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( n == <span class="number">1</span> )    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>( n % <span class="number">2</span> ) <span class="keyword">return</span> <span class="number">1</span> + solve( ( <span class="number">3</span> * n + <span class="number">1</span> ) / <span class="number">2</span> );</div><div class="line">    <span class="keyword">else</span>    <span class="keyword">return</span> <span class="number">1</span> + solve( n / <span class="number">2</span> );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%lld"</span>, &amp;n ) )&#123;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%lld\n"</span>, solve( n ) );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>很水的一道题..<br><del>dalao签到用</del></p>
+<p>则，如果给一个两位数<code>43</code>，我们就要输出<code>SSSS123</code>。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题意比较简单，按照思路写下来就好了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;n ) )&#123;</div><div class="line">        <span class="keyword">int</span> b, s, g;   <span class="comment">// 百, 十, 个</span></div><div class="line">        g = n % <span class="number">10</span>; <span class="comment">// 存放个位数</span></div><div class="line">        n /= <span class="number">10</span>;</div><div class="line">        s = n % <span class="number">10</span>; <span class="comment">// 存放十位数</span></div><div class="line">        n /= <span class="number">10</span>;</div><div class="line">        b = n % <span class="number">10</span>; <span class="comment">// 存放百位数</span></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; b; i++ )</div><div class="line">            <span class="built_in">putchar</span>( <span class="string">'B'</span> );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s; i++ )</div><div class="line">            <span class="built_in">putchar</span>( <span class="string">'S'</span> );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g; i++ )</div><div class="line">            <span class="built_in">printf</span>( <span class="string">"%d"</span>, i + <span class="number">1</span> );</div><div class="line">        <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>大水题。</p>
 
       
     </div>
@@ -153,7 +150,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://nezar657.github.io/2017/04/05/暴力-模拟-2017-04-05-PAT-B-1001/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://nezar657.github.io/2017/07/26/暴力-模拟-2017-07-26-PAT-B-1006/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
