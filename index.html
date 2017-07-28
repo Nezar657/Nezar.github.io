@@ -50,6 +50,49 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-07-28T03:11:11.000Z"><a href="/2017/07/28/暴力-模拟-2017-07-28-PAT-B-1008/">2017-07-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/07/28/暴力-模拟-2017-07-28-PAT-B-1008/">PAT-B] 1008. 数组元素循环右移问题 [模拟]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1008" target="_blank" rel="external">1008. 数组元素循环右移问题 (20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>题意应该不难理解。</p>
+<p>首先给两个数<code>N, M</code>，分别表示<strong>数组的大小</strong>和<strong>右移几位</strong><br>也就是说第<code>1</code>位数移动到<code>M + 1</code>位，以此类推。<br>而多出来的数则放在数组的前面。<br>很像小时候玩的贪吃蛇。</p>
+<p>比如样例：<br><code>6 2</code><br><code>1 2 3 4 5 6</code><br>先是前面的四个数都右移两位：<br><code>_ _ 1 2 3 4</code><br>然后多出来的<code>5, 6</code>移动到数组前面：<br><code>5 6 1 2 3 4</code></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题目理解起来并不难。不过要注意几点：</p>
+<ol>
+<li>给的<code>M</code>可能会比<code>N</code>要大，也就是说可能右移了好几圈。<br>比如在<code>400</code>米的操场上跑步，跑<code>100</code>米和跑<code>500</code>米最后停的位置是一样的。<br>所以这里我们要对<code>M</code>进行处理，让<code>M</code>对<code>N</code>取模（<code>M % N</code>），得到有效的偏移量</li>
+<li>说是右移，其实我们可以在存入数组的时候直接把元素放在合适的位置。假装我们已经右移了。<br>（当然想要严格按题意来的可以忽略这一点）</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> num[<span class="number">300</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> N, M;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d%d"</span>, &amp;N, &amp;M ) )&#123;</div><div class="line">        <span class="keyword">int</span> m = M % N;  <span class="comment">// 偏移量</span></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = m; i &lt; N; i++ )</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%d"</span>, num + i );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++ )</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%d"</span>, num + i );</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%d"</span>, num[<span class="number">0</span>] );</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++ )&#123;</div><div class="line">            <span class="built_in">printf</span>( <span class="string">" %d"</span>, num[i] );</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">""</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>毕竟OJ都是只看结果的呢…</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-07-27T12:57:56.000Z"><a href="/2017/07/27/数论-2017-07-27-PAT-B-1007/">2017-07-27</a></time>
       
       
@@ -450,60 +493,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-02-02T12:01:48.000Z"><a href="/2017/02/02/杂-blog-2017-02-02-Decorate/">2017-02-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/02/02/杂-blog-2017-02-02-Decorate/">hexo] Light主题的修改使用</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>（更新ing..）<br>（文中出现各类链接均来自搜索引擎。<strong>侵删</strong>）</p>
-<h2 id="使用hexo搭建博客"><a href="#使用hexo搭建博客" class="headerlink" title="使用hexo搭建博客"></a>使用hexo搭建博客</h2><p>博客搭建在Github上，地址是 <a href="https://nezar657.github.io">Nezar’s Nest</a> . 搭建的过程参考<a href="http://hifor.net/2015/07/01/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-hexo-github/" target="_blank" rel="external">零基础免费搭建个人博客-hexo+github</a></p>
-<p>这里要<strong>注意</strong>几点：</p>
-<ul>
-<li>上面链接中的<code>node.js</code>的版本最好在官网上下载 <strong>4.0.0</strong>（好像）以上的版本，不然<strong>淘宝NPM镜像</strong>步骤会失败</li>
-<li><strong>记得如果是用的上面文章中的淘宝镜像。 <code>npm</code> 以后都要改成 <code>cnpm</code> 来使用</strong> （非常重要！）</li>
-<li>Github的<strong>账号</strong>跟你要申请的博客的域名（<strong>xxx</strong>.github.io）黑体部分必须一致。否则博客会打不开，显示<strong>404</strong></li>
-</ul>
-<h2 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h2><p>当然这里你也可以用原来默认的官方主题<code>Landscape</code>.<br>这里给<strong>想换的朋友</strong>一个知乎上的问题链接 <a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">有哪些好看的 Hexo 主题？</a><br>我个人用的是其中很老的一个主题 <a href="https://github.com/hexojs/hexo-theme-light" target="_blank" rel="external">Light</a> . 很简约，我个人比较喜欢。</p>
-<p>选完了主题，接下来就要对主题发挥自己的修改了。毕竟别人的东西自己用起来多多少少会有些不习惯，更何况在大天朝，有些功能使用起来可能不好用甚至没办法用。<br>这里需要再给一个链接，以便修改掉一些<strong>必须去掉</strong>的功能，增加一些<strong>必须有</strong>的功能 <a href="http://www.mjiayou.com/2014/08/18/hexo-theme-modify-based-light/" target="_blank" rel="external">Hexo-基于hexo-theme-light的主题修改</a><br>（这个链接里的内容我暂时只做了第一个）</p>
-<p>然后接下来就是<strong>自由发挥</strong>了。</p>
-<h3 id="修改字体"><a href="#修改字体" class="headerlink" title="修改字体"></a>修改字体</h3><p>路径：<code>\themes\hexo-theme-light-master\source\css\_base\variable.styl</code><br>修改 <code>font-default = &quot;Times New Roman&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif</code><br>效果是以<strong>“Times New Roman”,”微软雅黑”,”Arial”,”sans-serif” </strong>的优先级设置默认字体，由于<strong>“Times New Roman”</strong>无法作用中文字体，所以中文字体是<strong>“微软雅黑”</strong>。<br>（大多数浏览器都支持<strong>微软雅黑</strong>，也比较好看）</p>
-<p>在同一个文件中继续修改标题的字体。<br>将<code>font-title = &quot;Lato&quot;,</code>修改为<code>font-title = &quot;Times New Roman&quot;,</code>。因为<code>Lato</code>这个字体有很多弊端。顺便将下面的<code>@import url(&quot;//fonts.googleapis.com/css?family=Lato:400,400italic&quot;)</code>删除。</p>
-<h3 id="添加友情链接的标签"><a href="#添加友情链接的标签" class="headerlink" title="添加友情链接的标签"></a>添加友情链接的标签</h3><h4 id="编写一个widget"><a href="#编写一个widget" class="headerlink" title="编写一个widget"></a>编写一个<code>widget</code></h4><p>由于<code>Light</code>主题中没有自带这个<code>widget</code>. 所以我们需要自己写一个。<br>路径：<code>\themes\hexo-theme-light-master\layout\_widget</code><br>在这个文件夹中创建一个文本文件，改成<code>blogroll.ejs</code><br>打开文件，将一下代码复制进去：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;widget tag&quot;&gt;</div><div class="line">	&lt;h3 class=&quot;title&quot;&gt;友情链接&lt;/h3&gt;</div><div class="line">	&lt;ul class=&quot;entry&quot;&gt;</div><div class="line">		&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/nezar&quot; title=&quot;Nezar&quot; target=&quot;_blank&quot;&gt;CSDN&lt;/a&gt;&lt;/li&gt;</div><div class="line">	&lt;/ul&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p>当然这里的链接部分可以自己修改（<code>href</code>后带链接 <code>title</code>表示鼠标悬停时显示文字 <code>target=&quot;_blank&quot;</code>表示在新窗口打开链接 <code>a</code>标签中间则是链接显示的文字）</p>
-<h4 id="把标签添加到博客里去"><a href="#把标签添加到博客里去" class="headerlink" title="把标签添加到博客里去"></a>把标签添加到博客里去</h4><p>路径：<code>\themes\hexo-theme-light-master\_config.yml</code><br>找到 <code>widgets:</code> 在下面添加 <code>- blogroll</code> （<code>-</code>后要加一个空格）<br>各类<code>widget</code>的顺序与博客上的显示上下位置有关</p>
-<h3 id="删除一二级标题下的横线"><a href="#删除一二级标题下的横线" class="headerlink" title="删除一二级标题下的横线"></a>删除一二级标题下的横线</h3><p><code>Light</code>这个主题有一点我超级不喜欢，就是一二级标题下面的横线。于是我就把它删掉了。当然你们觉得无所谓的话可以留着。<br>路径：<code>\themes\hexo-theme-light-master\source\css\_partial\article.styl</code><br>使用<code>ctrl+f</code>找到<code>h1</code> 然后把<code>border-bottom 1px solid color-border</code>这一行删掉。线就消失了。<br>我的话还把下一行的<code>10px</code>改成了<code>0px</code>. 因为感觉空得太多不太美观。</p>
-<h3 id="主标题下方加分割线"><a href="#主标题下方加分割线" class="headerlink" title="主标题下方加分割线"></a>主标题下方加分割线</h3><p>加上线以便区分<strong>标题</strong>和<strong>正文</strong>。<br>路径跟上一步一致：<code>\themes\hexo-theme-light-master\source\css\_partial\article.styl</code><br>使用<code>ctrl+f</code>找到<code>header</code> 然后稍微往下拉一点，找到<code>.title</code> 在<code>font-weight normal</code>下加两行代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">padding-bottom 15px</div><div class="line">border-bottom: 4px solid color-border</div></pre></td></tr></table></figure></p>
-<p>其中<code>border-bottom:</code>后的像素数据可以控制线的<strong>粗细</strong></p>
-<h3 id="设置多层分类"><a href="#设置多层分类" class="headerlink" title="设置多层分类"></a>设置多层分类</h3><p>如果要想博客写的有条理。博客中的每篇文章都应该有它的<strong>分类</strong>。一个大类里面还应该有多个小类。即为多层分类。<br>在<code>Light</code>主题中自带的分类只有单层的。无法表示出层次感。这里我也给一个链接 <a href="http://www.jianshu.com/p/e6e54389c88f" target="_blank" rel="external">Hexo主题中实现多级分类</a><br>大家可以按照这篇文章，设计自己的分类效果。</p>
-<h3 id="添加Latex公式效果"><a href="#添加Latex公式效果" class="headerlink" title="添加Latex公式效果"></a>添加Latex公式效果</h3><p>技术类的博客肯定少不了公式的，所以安装上<code>Latex</code>还是很有必要的。<br><a href="http://blog.csdn.net/emptyset110/article/details/50123231" target="_blank" rel="external">搭建一个支持LaTEX的hexo博客</a><br>（记得如果是用的上面文章中的淘宝镜像。<code>npm</code> 记得改成 <code>cnpm</code>）</p>
-<p><strong>暂时先这样，接下来的部分下次更新..</strong></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -531,7 +520,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
 </div>
 
 </aside>

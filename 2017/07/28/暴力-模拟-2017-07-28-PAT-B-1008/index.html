@@ -3,17 +3,18 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>PAT-B] 1004. 成绩排名 [查找] | Nezar&#39;s Nest</title>
+  <title>PAT-B] 1008. 数组元素循环右移问题 [模拟] | Nezar&#39;s Nest</title>
   <meta name="author" content="Nezar">
   
-  <meta name="description" content="链接：1004. 成绩排名 (20)
-题意给你很多学生的成绩，然后找出拿最高分的学生和拿最低分的学生。
-分析解决这类问题有很多种方法，我的想法就是能不存下来就不存下来，尽量采用在线处理的方式，$O(n)$ 的复杂度，很快。在线处理就是说在边存入数据的时候就直接处理。这道问题中，每次输入一个学生的三个">
+  <meta name="description" content="链接：1008. 数组元素循环右移问题 (20)
+题意题意应该不难理解。
+首先给两个数N, M，分别表示数组的大小和右移几位也就是说第1位数移动到M + 1位，以此类推。而多出来的数则放在数组的前面。很像小时候玩的贪吃蛇。
+比如样例：6 21 2 3 4 5 6先是前面的四个数都右移两位：_ _ 1">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="PAT-B] 1004. 成绩排名 [查找]"/>
+  <meta property="og:title" content="PAT-B] 1008. 数组元素循环右移问题 [模拟]"/>
   <meta property="og:site_name" content="Nezar&#39;s Nest"/>
 
   
@@ -53,21 +54,27 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-04-12T03:02:53.000Z"><a href="/2017/04/12/查找-2017-04-12-PAT-B-1004/">2017-04-12</a></time>
+        <time datetime="2017-07-28T03:11:11.000Z"><a href="/2017/07/28/暴力-模拟-2017-07-28-PAT-B-1008/">2017-07-28</a></time>
       
       
   
-    <h1 class="title">PAT-B] 1004. 成绩排名 [查找]</h1>
+    <h1 class="title">PAT-B] 1008. 数组元素循环右移问题 [模拟]</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1004" target="_blank" rel="external">1004. 成绩排名 (20)</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给你很多学生的成绩，然后找出拿最高分的学生和拿最低分的学生。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>解决这类问题有很多种方法，我的想法就是能不存下来就不存下来，尽量采用<strong>在线处理</strong>的方式，$O(n)$ 的复杂度，很快。<br>在线处理就是说<strong>在边存入数据的时候就直接处理。</strong><br>这道问题中，每次输入一个学生的三个信息，就把他的成绩跟我们已经存好的最高和最低分进行比较，如果更大或者更小，就直接用这个学生的信息替换到已经存好的信息。<br>这样，当我们录入完信息之后，答案也就出来了。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> stu&#123;</div><div class="line">    <span class="keyword">char</span> name[ <span class="number">12</span> ], no[ <span class="number">12</span> ];</div><div class="line">    <span class="keyword">int</span> score;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;n ) )&#123;</div><div class="line">        stu ma, mi, t;  <span class="comment">//成绩最高，最低 和 当前学生</span></div><div class="line">        <span class="built_in">scanf</span>( <span class="string">"%s%s%d"</span>, t.name, t.no, &amp;t.score );</div><div class="line">        ma = t; mi = t;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++ )&#123;</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%s%s%d"</span>, t.name, t.no, &amp;t.score );</div><div class="line">            <span class="keyword">if</span>( t.score &gt; ma.score )    ma = t;</div><div class="line">            <span class="keyword">if</span>( t.score &lt; mi.score )    mi = t;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%s %s\n"</span>, ma.name, ma.no );</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%s %s\n"</span>, mi.name, mi.no );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>一道简单的查找题..</p>
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1008" target="_blank" rel="external">1008. 数组元素循环右移问题 (20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>题意应该不难理解。</p>
+<p>首先给两个数<code>N, M</code>，分别表示<strong>数组的大小</strong>和<strong>右移几位</strong><br>也就是说第<code>1</code>位数移动到<code>M + 1</code>位，以此类推。<br>而多出来的数则放在数组的前面。<br>很像小时候玩的贪吃蛇。</p>
+<p>比如样例：<br><code>6 2</code><br><code>1 2 3 4 5 6</code><br>先是前面的四个数都右移两位：<br><code>_ _ 1 2 3 4</code><br>然后多出来的<code>5, 6</code>移动到数组前面：<br><code>5 6 1 2 3 4</code></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题目理解起来并不难。不过要注意几点：</p>
+<ol>
+<li>给的<code>M</code>可能会比<code>N</code>要大，也就是说可能右移了好几圈。<br>比如在<code>400</code>米的操场上跑步，跑<code>100</code>米和跑<code>500</code>米最后停的位置是一样的。<br>所以这里我们要对<code>M</code>进行处理，让<code>M</code>对<code>N</code>取模（<code>M % N</code>），得到有效的偏移量</li>
+<li>说是右移，其实我们可以在存入数组的时候直接把元素放在合适的位置。假装我们已经右移了。<br>（当然想要严格按题意来的可以忽略这一点）</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> num[<span class="number">300</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> N, M;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d%d"</span>, &amp;N, &amp;M ) )&#123;</div><div class="line">        <span class="keyword">int</span> m = M % N;  <span class="comment">// 偏移量</span></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = m; i &lt; N; i++ )</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%d"</span>, num + i );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++ )</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%d"</span>, num + i );</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%d"</span>, num[<span class="number">0</span>] );</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++ )&#123;</div><div class="line">            <span class="built_in">printf</span>( <span class="string">" %d"</span>, num[i] );</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">""</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>毕竟OJ都是只看结果的呢…</p>
 
       
     </div>
@@ -76,13 +83,13 @@
         
   
   <div class="categories">
-    <a href="/categories/查找/">查找</a>
+    <a href="/categories/暴力/">暴力</a>, <a href="/categories/暴力/模拟/">模拟</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/PAT-B/">PAT-B</a>, <a href="/tags/查找/">查找</a>
+    <a href="/tags/PAT-B/">PAT-B</a>, <a href="/tags/模拟/">模拟</a>
   </div>
 
         <div class="bdsharebuttonbox">
@@ -139,7 +146,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://nezar657.github.io/2017/04/12/查找-2017-04-12-PAT-B-1004/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://nezar657.github.io/2017/07/28/暴力-模拟-2017-07-28-PAT-B-1008/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
