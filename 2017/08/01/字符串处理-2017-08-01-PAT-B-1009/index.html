@@ -3,17 +3,20 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>PAT-B] 1004. 成绩排名 [查找] | Nezar&#39;s Nest</title>
+  <title>PAT-B] 1009. 说反话 [字符串处理] | Nezar&#39;s Nest</title>
   <meta name="author" content="Nezar">
   
-  <meta name="description" content="链接：1004. 成绩排名 (20)
-题意给你很多学生的成绩，然后找出拿最高分的学生和拿最低分的学生。
-分析解决这类问题有很多种方法，我的想法就是能不存下来就不存下来，尽量采用在线处理的方式，$O(n)$ 的复杂度，很快。在线处理就是说在边存入数据的时候就直接处理。这道问题中，每次输入一个学生的三个">
+  <meta name="description" content="链接：1009. 说反话 (20)
+题意在一行中给出若干个单词，然后从最后一个单词开始逆序输出
+分析逆序输出的话，应该马上就会想到栈这个数据结构。
+然后就把每个单词看做一个字符串，按顺序放到栈里去。输出的时候依次出栈，就好了。
+硬要再有说的话，就是注意一下格式了。
+代码123456789101112">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="PAT-B] 1004. 成绩排名 [查找]"/>
+  <meta property="og:title" content="PAT-B] 1009. 说反话 [字符串处理]"/>
   <meta property="og:site_name" content="Nezar&#39;s Nest"/>
 
   
@@ -53,21 +56,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-04-12T03:02:53.000Z"><a href="/2017/04/12/查找-2017-04-12-PAT-B-1004/">2017-04-12</a></time>
+        <time datetime="2017-08-01T04:46:41.000Z"><a href="/2017/08/01/字符串处理-2017-08-01-PAT-B-1009/">2017-08-01</a></time>
       
       
   
-    <h1 class="title">PAT-B] 1004. 成绩排名 [查找]</h1>
+    <h1 class="title">PAT-B] 1009. 说反话 [字符串处理]</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1004" target="_blank" rel="external">1004. 成绩排名 (20)</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给你很多学生的成绩，然后找出拿最高分的学生和拿最低分的学生。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>解决这类问题有很多种方法，我的想法就是能不存下来就不存下来，尽量采用<strong>在线处理</strong>的方式，$O(n)$ 的复杂度，很快。<br>在线处理就是说<strong>在边存入数据的时候就直接处理。</strong><br>这道问题中，每次输入一个学生的三个信息，就把他的成绩跟我们已经存好的最高和最低分进行比较，如果更大或者更小，就直接用这个学生的信息替换到已经存好的信息。<br>这样，当我们录入完信息之后，答案也就出来了。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> stu&#123;</div><div class="line">    <span class="keyword">char</span> name[ <span class="number">12</span> ], no[ <span class="number">12</span> ];</div><div class="line">    <span class="keyword">int</span> score;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;n ) )&#123;</div><div class="line">        stu ma, mi, t;  <span class="comment">//成绩最高，最低 和 当前学生</span></div><div class="line">        <span class="built_in">scanf</span>( <span class="string">"%s%s%d"</span>, t.name, t.no, &amp;t.score );</div><div class="line">        ma = t; mi = t;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++ )&#123;</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%s%s%d"</span>, t.name, t.no, &amp;t.score );</div><div class="line">            <span class="keyword">if</span>( t.score &gt; ma.score )    ma = t;</div><div class="line">            <span class="keyword">if</span>( t.score &lt; mi.score )    mi = t;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%s %s\n"</span>, ma.name, ma.no );</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%s %s\n"</span>, mi.name, mi.no );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>一道简单的查找题..</p>
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1009" target="_blank" rel="external">1009. 说反话 (20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>在一行中给出若干个单词，然后从最后一个单词开始逆序输出</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>逆序输出的话，应该马上就会想到<strong>栈</strong>这个数据结构。</p>
+<p>然后就把<strong>每个单词</strong>看做<strong>一个字符串</strong>，按顺序放到<strong>栈</strong>里去。输出的时候依次出栈，就好了。</p>
+<p>硬要再有说的话，就是注意一下格式了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="built_in">stack</span>&lt; <span class="built_in">string</span> &gt; stk;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> str;</div><div class="line">    <span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; str ) stk.push( str );</div><div class="line">    str = stk.top();</div><div class="line">    stk.pop();</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; str;</div><div class="line">    <span class="keyword">while</span>( !stk.empty() )&#123;</div><div class="line">        str = stk.top();</div><div class="line">        stk.pop();</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; str;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>了解一下<code>C++</code>自带的<code>STL</code>就不难解决这个问题。</p>
 
       
     </div>
@@ -76,13 +81,13 @@
         
   
   <div class="categories">
-    <a href="/categories/查找/">查找</a>
+    <a href="/categories/字符串处理/">字符串处理</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/PAT-B/">PAT-B</a>, <a href="/tags/查找/">查找</a>
+    <a href="/tags/PAT-B/">PAT-B</a>, <a href="/tags/字符串处理/">字符串处理</a>
   </div>
 
         <div class="bdsharebuttonbox">
@@ -139,7 +144,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://nezar657.github.io/2017/04/12/查找-2017-04-12-PAT-B-1004/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://nezar657.github.io/2017/08/01/字符串处理-2017-08-01-PAT-B-1009/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

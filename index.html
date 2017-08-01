@@ -50,6 +50,45 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-08-01T04:46:41.000Z"><a href="/2017/08/01/字符串处理-2017-08-01-PAT-B-1009/">2017-08-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/08/01/字符串处理-2017-08-01-PAT-B-1009/">PAT-B] 1009. 说反话 [字符串处理]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1009" target="_blank" rel="external">1009. 说反话 (20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>在一行中给出若干个单词，然后从最后一个单词开始逆序输出</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>逆序输出的话，应该马上就会想到<strong>栈</strong>这个数据结构。</p>
+<p>然后就把<strong>每个单词</strong>看做<strong>一个字符串</strong>，按顺序放到<strong>栈</strong>里去。输出的时候依次出栈，就好了。</p>
+<p>硬要再有说的话，就是注意一下格式了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="built_in">stack</span>&lt; <span class="built_in">string</span> &gt; stk;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> str;</div><div class="line">    <span class="keyword">while</span>( <span class="built_in">cin</span> &gt;&gt; str ) stk.push( str );</div><div class="line">    str = stk.top();</div><div class="line">    stk.pop();</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; str;</div><div class="line">    <span class="keyword">while</span>( !stk.empty() )&#123;</div><div class="line">        str = stk.top();</div><div class="line">        stk.pop();</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; str;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>了解一下<code>C++</code>自带的<code>STL</code>就不难解决这个问题。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-07-28T03:11:11.000Z"><a href="/2017/07/28/暴力-模拟-2017-07-28-PAT-B-1008/">2017-07-28</a></time>
       
       
@@ -429,70 +468,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-02-18T18:41:25.000Z"><a href="/2017/02/19/暴力-模拟-2017-02-19-codeforces398D2B/">2017-02-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/02/19/暴力-模拟-2017-02-19-codeforces398D2B/">codeforces] #398(Div.2) B. The Queue [模拟]</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>链接：<a href="http://codeforces.com/problemset/problem/767/B" target="_blank" rel="external">Codeforces Round #398 (Div. 2) B. The Queue</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>Vasya 这个人终于成年了。有一天，他想去办个护照<del>（年龄到了就想出去浪）</del>。说做咱就做，他决定明天就去办事处搞点事情。</p>
-<p>但是问题就出现了，办证这种事情一看就会有很多人，哪个时候去可以少排一会儿队呢？</p>
-<p>Vasya决定将偷懒进行到底，先是弄来了办事处的<strong>开门时间</strong> $t_s$ ，<strong>关门时间</strong> $t_f$ 和<strong>为每个客户服务需要消耗的时间</strong> $e_t$（这里假设每个客户需要的时间相同）。然后他又通过特殊渠道得知了明天<strong>会有 $n$ 个客户</strong>，以及<strong>每个客户来的具体时间 $n_t$ </strong></p>
-<p>补充：</p>
-<ol>
-<li>Vasya和其他客户到达办事处的时间点均为整点。</li>
-<li>当Vasya和其他人同时到达时，Vasya会表现出他的绅士风度，让其他人排在他前面</li>
-<li>工作人员反应很快，一旦有人来就会马上开始工作</li>
-<li>如果给的数据有多个答案，只需给出其中任意一个答案</li>
-<li>Vasya在明天必须拿到护照</li>
-</ol>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题意描述应该非常清晰了，但这个题目里面所包含的各种特殊情况在比赛的时候不是那么容易考虑得到。<br>所有的情况大概有以下几点：</p>
-<ol>
-<li>来的人不是很多或者工作效率很高，在整个工作时间内有那么一个时刻工作人员在玩手机</li>
-<li>办事处还没开门，但早就有围观群众到场了</li>
-<li>虽然来了很多人，但是大家都睡过了头，在关门之后才到</li>
-<li>人满为患，这一天都有很多人没能办成功的</li>
-</ol>
-<p>1 和 3 应该是比较简单的，直接找一个空闲的时间作为答案就可以了。相比较而言比较麻烦的是 2 和 4 。<br>2 和 4 需要在各个客户之间的时间进行比较判断，才能寻得最优解。<br>当然这四个都不是难的，结合起来更麻烦。</p>
-<p><strong>下面就说一下我的思路：</strong></p>
-<p>最优解就在 <strong>空闲时间</strong> 和 <strong>某个客户来之前一分钟的那个时间（$n_t-1$）</strong> 其中一个。</p>
-<p>空闲时间就不解释了。根本不用等啊。<br>（但是一定要保证到关门之前有充足的时间来办护照哦，即$t+e_t&lt;t_f$）</p>
-<p>后面那个的话就是</p>
-<ol>
-<li><strong>把本来可以排最少时间的客户挤掉，代替他的位置。</strong>（这样你就必须比他早来）</li>
-<li><strong>尽可能地不在前面的人身上浪费时间。</strong>（只要早一分钟来）</li>
-</ol>
-<p>然后这个问题就变成了求<strong>哪个客户等的时间最短</strong>的问题<br>（分别求出他们离开的时间就行了）<br>（总共就$10^6$的客户，都遍历一遍也没问题）</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">typedef</span> __int64 LL;</div><div class="line"></div><div class="line">LL nt[<span class="number">100005</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    LL ts,tf,et;</div><div class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%I64d%I64d%I64d"</span>,&amp;ts,&amp;tf,&amp;et))&#123;</div><div class="line">        <span class="keyword">int</span> n;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>,&amp;nt[i]);</div><div class="line">        &#125;</div><div class="line">        LL t=ts,ans=nt[<span class="number">1</span>]<span class="number">-1</span>;</div><div class="line">        LL low=t-nt[<span class="number">1</span>]+<span class="number">1</span>;   <span class="comment">//最少消耗的时间</span></div><div class="line">        <span class="keyword">if</span>(ans+et&gt;tf)&#123;</div><div class="line">            ans=ts;</div><div class="line">            t=tf+<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> f=<span class="number">0</span>;    <span class="comment">//判断是否有空闲时间</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n&amp;&amp;t&lt;=tf;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(nt[i]&gt;t)&#123;</div><div class="line">                ans=t;</div><div class="line">                f=<span class="number">1</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(i&gt;<span class="number">1</span>)&#123;</div><div class="line">                LL l=t-nt[i]+<span class="number">1</span>; <span class="comment">//当前客户消耗的时间</span></div><div class="line">                <span class="keyword">if</span>(l&lt;low)&#123;</div><div class="line">                    ans=nt[i]<span class="number">-1</span>;</div><div class="line">                    low=l;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            t+=et;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(f)   <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>,ans);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>((t&lt;tf)&amp;&amp;((t+et)&lt;=tf))   <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>,t);</div><div class="line">        <span class="keyword">else</span>    <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>,ans);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>由于这个题目考虑的点比较多且繁琐（在比赛的时候我真的这样觉得！）所以就收录下来了<del>（其实是个水题）</del><br>针对模拟类的题目自己不是特别敏感，写一下也加深印象。</p>
-<p>如果有更好的方法或者我有什么不足或者有什么值得探讨的东西的话，可以评论或者联系我。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -520,7 +495,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
 </div>
 
 </aside>
