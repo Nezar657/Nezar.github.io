@@ -3,16 +3,19 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Beginning | Nezar&#39;s Nest</title>
+  <title>PAT-B] 1011. A+B和C [模拟] | Nezar&#39;s Nest</title>
   <meta name="author" content="Nezar">
   
-  <meta name="description" content="All things are difficult before they are easy.万事开头难。我把它放在我的第一篇正式公开博客的最前面，不只是给我也给来到我的博客的人看。加油 (๑•̀ㅂ•́)و✧
-为什么要写博客？很多人可能都会问这个问题。写博客明明需要花费很多时间，为什么又要花这么多时间">
+  <meta name="description" content="链接：1011. A+B和C (15)
+题意先输入一个T，表示测试的输入数量。
+每组输入给三个整数 A, B, C。判断一下A + B是不是大于C
+分析好简单啊。唯一注意一下A, B, C三者的范围就好了。
+代码1234567891011121314#include &amp;lt;cstdio&amp;gt;in">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Beginning"/>
+  <meta property="og:title" content="PAT-B] 1011. A+B和C [模拟]"/>
   <meta property="og:site_name" content="Nezar&#39;s Nest"/>
 
   
@@ -52,41 +55,22 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-02-01T18:19:08.000Z"><a href="/2017/02/02/杂-个人-2017-02-02-Beginning/">2017-02-02</a></time>
+        <time datetime="2017-08-03T01:29:34.000Z"><a href="/2017/08/03/暴力-模拟-2017-08-03-PAT-B-1011/">2017-08-03</a></time>
       
       
   
-    <h1 class="title">Beginning</h1>
+    <h1 class="title">PAT-B] 1011. A+B和C [模拟]</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="All-things-are-difficult-before-they-are-easy"><a href="#All-things-are-difficult-before-they-are-easy" class="headerlink" title="All things are difficult before they are easy."></a>All things are difficult before they are easy.</h1><p><strong>万事开头难。</strong>我把它放在我的第一篇正式公开博客的最前面，不只是给我也给来到我的博客的人看。加油 (๑•̀ㅂ•́)و✧</p>
-<h2 id="为什么要写博客？"><a href="#为什么要写博客？" class="headerlink" title="为什么要写博客？"></a>为什么要写博客？</h2><p>很多人可能都会问这个问题。写博客明明需要花费很多时间，为什么又要花这么多时间去制作一篇或者几篇博客呢。</p>
-<p>在我看来，写博客既不浪费时间反而有很多<strong>好处</strong>：</p>
-<ul>
-<li>巩固刚掌握的知识</li>
-<li>对各个方法加深印象</li>
-<li>方便以后再次复习</li>
-<li>在写博客的过程中又能有更多的思路</li>
-<li>分享我的思路以便与他人探讨，相互促进<del>（如果真的有人看的话）</del></li>
-<li>…</li>
-</ul>
-<p>不得不说写博客有太多好处，有很多我可能还没有注意到。但从此刻起，我也正式放弃了只在电脑或者云端中存着代码的习惯。</p>
-<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>我的博客的话，大部分应该是关于<strong>算法</strong>，相对来说会比较<strong>杂</strong>。因为还是一个<em>在读本科生</em>，所以可能会穿插一些<strong>课堂作业</strong>等。</p>
-<p>总而言之，这个博客会与我的<strong>近期学习的方面</strong>相关。（毕竟还是自己的博客啊）</p>
-<p>大致会是：</p>
-<ul>
-<li><strong>各类算法</strong></li>
-<li><strong>各类代码语言</strong></li>
-<li><strong>慢慢学做游戏</strong></li>
-<li><strong>各类课程内容</strong></li>
-<li><strong>…</strong></li>
-</ul>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><del>（其实我非常怀疑在这个位置留各类联系方式的作用！）</del></p>
-<p>如果有希望跟我交流的可以加企鹅 <strong>591494381</strong></p>
-<p>喜欢的话点个关注吧！￣O￣)ノ</p>
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1011" target="_blank" rel="external">1011. A+B和C (15)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>先输入一个<code>T</code>，表示测试的输入数量。</p>
+<p>每组输入给三个整数 <code>A, B, C</code>。<br>判断一下<code>A + B</code>是不是大于<code>C</code></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>好简单啊。<br>唯一注意一下<code>A, B, C</code>三者的范围就好了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> A, B, C;</div><div class="line">    <span class="keyword">int</span> T;</div><div class="line">    <span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;T );</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= T; i++ )&#123;</div><div class="line">        <span class="built_in">scanf</span>( <span class="string">"%lld%lld%lld"</span>, &amp;A, &amp;B, &amp;C );</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"Case #%d: "</span>, i );</div><div class="line">        <span class="keyword">if</span>( A + B &gt; C ) <span class="built_in">puts</span>( <span class="string">"true"</span> );</div><div class="line">        <span class="keyword">else</span>    <span class="built_in">puts</span>( <span class="string">"false"</span> );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>大大水题。</p>
 
       
     </div>
@@ -95,13 +79,13 @@
         
   
   <div class="categories">
-    <a href="/categories/杂/">杂</a>, <a href="/categories/杂/个人/">个人</a>
+    <a href="/categories/暴力/">暴力</a>, <a href="/categories/暴力/模拟/">模拟</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/blog/">blog</a>
+    <a href="/tags/PAT-B/">PAT-B</a>, <a href="/tags/模拟/">模拟</a>
   </div>
 
         <div class="bdsharebuttonbox">
@@ -158,7 +142,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://nezar657.github.io/2017/02/02/杂-个人-2017-02-02-Beginning/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://nezar657.github.io/2017/08/03/暴力-模拟-2017-08-03-PAT-B-1011/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

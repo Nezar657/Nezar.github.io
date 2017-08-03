@@ -50,6 +50,100 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-04-11T17:25:04.000Z"><a href="/2017/04/12/字符串处理-2017-04-12-PAT-B-1003/">2017-04-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/04/12/字符串处理-2017-04-12-PAT-B-1003/">PAT-B] 1003. 我要通过！ [字符串处理]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1003" target="_blank" rel="external">1003. 我要通过！(20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>一道字符串处理问题。<br>输入一行字符串 :</p>
+<ol>
+<li>字符串中<strong>必须仅有P, A, T</strong>这三种字符，不可以包含其它字符；</li>
+<li>任意<strong>形如 xPATx</strong> 的字符串都可以获得“答案正确”，其中 x 或者是<strong>空字符串</strong>，或者是仅由字母 A 组成的字符串；</li>
+<li><strong>如果 aPbTc 是正确的，那么 aPbATca 也是正确的</strong>，其中 a, b, c 均或者是空字符串，或者是仅由字母 A 组成的字符串。</li>
+</ol>
+<p>满足这三个条件就输出“YES”， 否则输出“NO”</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>条件1 只是针对字符串有限制，<strong>作前提</strong>。</p>
+<p>再看 2 和 3 :<br>条件2 是“YES”的<strong>直接要求</strong>，而条件3 是 <strong>间接要求</strong></p>
+<p>整理思路 :</p>
+<ol>
+<li>首先满足前提，字符串中分别只能<strong>依次</strong>出现<strong>一个 P</strong> 和 <strong>一个 T</strong>，其余若干项<strong>只能填充 A</strong></li>
+<li>条件2 中提出 P 和 T 之间由一个 A 分隔，且 <strong>a == c</strong> （小写表示长度，下同）。 条件3 中提出 aPbTc 正确，则 aPbATca 也正确，这就给了我们一个关系式 : <strong>c == b * a</strong>。只要满足该关系式，字符串就能通过。 </li>
+</ol>
+<p>有一点注意 :<br>这道题有题意不清楚的地方。就是<strong>并不是</strong> aPbTc 这种形式出现过了，aPbATca 才正确。<strong>只要递推到最后的式子满足条件2 就是“YES”</strong></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> N;</div><div class="line"><span class="keyword">char</span> c;</div><div class="line"><span class="keyword">int</span> f, P, T, i;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;N ) )&#123;</div><div class="line">        getchar();</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> t = <span class="number">0</span>; t &lt; N; t++ )&#123;</div><div class="line">            f = <span class="number">1</span>, i = <span class="number">-1</span>, P = <span class="number">-1</span>, T = <span class="number">-1</span>;</div><div class="line">            <span class="keyword">while</span>( <span class="built_in">scanf</span>( <span class="string">"%c"</span>, &amp;c ) &amp;&amp; c != <span class="string">'\n'</span> )&#123;</div><div class="line">                i++;</div><div class="line">                <span class="keyword">if</span>( c == <span class="string">'P'</span> )&#123;</div><div class="line">                    <span class="keyword">if</span>( P == <span class="number">-1</span> )   P = i;  <span class="comment">//第一次遇到 P, 记录位置</span></div><div class="line">                    <span class="keyword">else</span>    f = <span class="number">0</span>;          <span class="comment">//第二次遇到 P, 改结果 f 为不通过</span></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span>( c == <span class="string">'T'</span>)&#123;     <span class="comment">//同 P 的处理</span></div><div class="line">                    <span class="keyword">if</span>( T == <span class="number">-1</span> )   T = i;</div><div class="line">                    <span class="keyword">else</span>    f = <span class="number">0</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span>( c != <span class="string">'A'</span> ) f = <span class="number">0</span>;  <span class="comment">//遇 PAT 以外的字母, 改结果 f 为不通过</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>( f )&#123;</div><div class="line">                <span class="keyword">if</span>( P == <span class="number">-1</span> || T == <span class="number">-1</span> )    f = <span class="number">0</span>;  <span class="comment">//判断是否有 P 和 T</span></div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span>( P &gt;= T - <span class="number">1</span> )    f = <span class="number">0</span>;     <span class="comment">//判断 P 和 T 的 位置是否满足要求</span></div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span>( i - T != ( T - P - <span class="number">1</span> ) * P )    f = <span class="number">0</span>; <span class="comment">//关键递推式</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>( f ) <span class="built_in">puts</span>( <span class="string">"YES"</span> );</div><div class="line">            <span class="keyword">else</span>    <span class="built_in">puts</span>( <span class="string">"NO"</span> );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>分析出结论就不难..<br>一开始会掉到我提到的注意的地方。<del>（应该不是我脑回路不正常吧！）</del></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-04-05T15:19:23.000Z"><a href="/2017/04/05/字符串处理-2017-04-05-PAT-B-1002/">2017-04-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/04/05/字符串处理-2017-04-05-PAT-B-1002/">PAT-B] 1002. 写出这个数 [字符串处理]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1002" target="_blank" rel="external">1002. 写出这个数(20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>输入一个整数 n 。<br>计算 n 的每一位的相加的和 sum<br>以拼音的方式顺位输出</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>首先，这个 n 范围很大.. <strong>小于 $10^{100}$</strong> 。<br>也就是说这个 n <strong>最大</strong>可以取到 $10^{100} - 1$ 。<br>所以先定位到<strong>字符串处理问题</strong>。（虽然可以不用字符串，用轻松的方法来写。详见代码）</p>
+<p>如果用字符来存储某一位数字的话，在计算 sum 的时候就要注意 <strong>- ‘0’</strong>。不减的话可以要犯大错误的。</p>
+<p>算完 sum 之后 输出每一位数字的拼音的时候。要注意两点 :</p>
+<ol>
+<li>拼音要高位先输出，之间有空格最后没空格</li>
+<li>拼音要学好  (・-・*)</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">char</span>* py[<span class="number">10</span>]=&#123; <span class="string">"ling"</span>, <span class="string">"yi"</span>, <span class="string">"er"</span>, <span class="string">"san"</span>, <span class="string">"si"</span>, <span class="string">"wu"</span>, <span class="string">"liu"</span>, <span class="string">"qi"</span>, <span class="string">"ba"</span>, <span class="string">"jiu"</span> &#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> n;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%c"</span>, &amp;n ) &amp;&amp; n != <span class="string">'\n'</span> )&#123;</div><div class="line">        sum += n - <span class="string">'0'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">stack</span>&lt; <span class="keyword">int</span> &gt; stk;</div><div class="line">    <span class="keyword">while</span>( sum )&#123;</div><div class="line">        stk.push( sum % <span class="number">10</span> );</div><div class="line">        sum /= <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>( <span class="string">"%s"</span>, py[ stk.top() ] );</div><div class="line">    stk.pop();</div><div class="line">    <span class="keyword">while</span>( stk.size() )&#123;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">" %s"</span>, py[ stk.top() ] );</div><div class="line">        stk.pop();</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>用上stack写起来比较简单..</p>
+<p>//</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-04-05T14:10:22.000Z"><a href="/2017/04/05/暴力-模拟-2017-04-05-PAT-B-1001/">2017-04-05</a></time>
       
       
@@ -290,7 +384,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
 </div>
 
 </aside>
