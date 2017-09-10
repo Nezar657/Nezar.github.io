@@ -50,6 +50,43 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-04-19T05:46:59.000Z"><a href="/2017/04/19/查找-2017-04-19-PAT-B-1005/">2017-04-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/04/19/查找-2017-04-19-PAT-B-1005/">PAT-B] 1005. 继续(3n+1)猜想 [查找]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1005" target="_blank" rel="external">1005. 继续(3n+1)猜想 (25)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>(3n+1)猜想的衍生题目。<br>给你一串数字，对每个数字进行猜想的验证，<strong>如果其中的某些数字并没有在验证其他数字的时候被验证过</strong>，那这些数字就是关键数字。并以<strong>从大到小</strong>的顺序输出他们。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>这道题目的话不需要想太多，就依次验证每一个数字就可以了。<strong>在验证数字的过程中，把每一个中间数字都保存下来就可以了。</strong><br>所以我们需要一个保存数字的数组<code>f[]</code>，然后对中间数字进行标记（比如验证<code>5</code>的时候，就能得到中间数字<code>8, 4, 2, 1</code>，分别将<code>f[8], f[4], f[2], f[1]</code>都置为1就可以了）<br>值得一提的是，在递归验证思想的时候<strong>如果发现某个中间数字已经被置为1了，那么就不需要再递归下去了</strong>，因为下面的数字都已经被算过了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> f[ <span class="number">100000</span> ];    <span class="comment">//标记这个数字是否已经查找过了</span></div><div class="line"><span class="keyword">int</span> in[ <span class="number">105</span> ];      <span class="comment">//输入</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">( <span class="keyword">int</span> n, <span class="keyword">int</span> i )</span></span>&#123; <span class="comment">//n为由猜想递归计算得到的数 i为输入的当前数字</span></div><div class="line">    <span class="keyword">if</span>( f[ n ] || n == <span class="number">1</span> )  <span class="keyword">return</span>; <span class="comment">//得到的n已经查找过了或者已经查找到1满足猜想了就结束程序</span></div><div class="line">    <span class="keyword">if</span>( n != i )    f[ n ] = <span class="number">1</span>; <span class="comment">//将递归计算到的数都置为 1 表明这些数字都已经在验证猜想时被覆盖了</span></div><div class="line">    <span class="keyword">if</span>( n % <span class="number">2</span> )     solve( ( <span class="number">3</span> * n + <span class="number">1</span> ) / <span class="number">2</span>, i );</div><div class="line">    <span class="keyword">else</span>    solve( n / <span class="number">2</span>, i );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> k;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;k ) )&#123;</div><div class="line">        <span class="built_in">memset</span>( f, <span class="number">0</span>, <span class="keyword">sizeof</span> f );</div><div class="line">        <span class="built_in">memset</span>( in, <span class="number">0</span>, <span class="keyword">sizeof</span> in );</div><div class="line">        f[ <span class="number">1</span> ] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++ )&#123;</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%d"</span>, in + i );</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++ )&#123;</div><div class="line">            solve( in[ i ], in[ i ] );</div><div class="line">        &#125;</div><div class="line">        sort( in, in + k ); <span class="comment">//排序方便降序输出</span></div><div class="line">        <span class="keyword">int</span> flag = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = k - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i-- )&#123;</div><div class="line">            <span class="keyword">if</span>( f[ in[ i ] ] == <span class="number">0</span> )&#123;    <span class="comment">//f为0表示该数没在递归中被查找到，则输出</span></div><div class="line">                <span class="keyword">if</span>( flag )  flag = <span class="number">0</span>;</div><div class="line">                <span class="keyword">else</span>        <span class="built_in">printf</span>( <span class="string">" "</span> );  <span class="comment">//空格规范</span></div><div class="line">                <span class="built_in">printf</span>( <span class="string">"%d"</span>, in[ i ] );</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>就慢慢做就好了..</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-04-12T03:02:53.000Z"><a href="/2017/04/12/查找-2017-04-12-PAT-B-1004/">2017-04-12</a></time>
       
       
@@ -421,7 +458,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
 </div>
 
 </aside>
