@@ -50,6 +50,56 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-09-21T07:54:57.000Z"><a href="/2017/09/21/暴力-模拟-2017-09-21-PAT-B-1015/">2017-09-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/09/21/暴力-模拟-2017-09-21-PAT-B-1015/">PAT-B] 1015. 德才论 [模拟]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1015" target="_blank" rel="external">1015. 德才论 (25)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>第一行给出三个整数 <code>N, L, H</code> 表示 学生人数，最低录取分数线 和 优先录取线（其实就是优秀和良好的分界线啦）。</p>
+<p>然后给出一大堆学生的 学号和其各自的 德才分。让你按司马光的理论给出录取排名。<br>总结一下排名次的要求如下：</p>
+<ol>
+<li>德才分只要有一个没及格（即没达到最低录取分数线<code>L</code>）直接剔除，不放入排名。</li>
+<li>排名先分类，后在各类别中按德才总分排序。</li>
+<li>分类分四类：<pre><code>第一类：“才德全尽”— 德，才两项分数均大于等于优先录取线`H`。
+第二类：“德胜才”— 德分大于等于优先录取分数线`H`，但才分没达到。
+第三类：“才德兼亡”但尚有“德胜才”— 德才分均未达到优先录取线`H`，但德分不低于才分。
+第四类：“才胜德”— 除上述三类之外的其他未不及格考生。
+</code></pre></li>
+<li>如果德才总分相同，则德分高排前；若仍相同，则按准考证号升序排列。</li>
+</ol>
+<p>最后输出录取人数和排好名次的学生信息即可。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>既然排名次的要求写得这么明确，那我们就直接写一个<code>cmp</code>，然后让<code>sort()</code>直接帮我们排好序就好了。</p>
+<p>注意好排序的要求，应该不会出错。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> stuMAX 100005</span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> stu&#123;</div><div class="line">    <span class="keyword">int</span> no;</div><div class="line">    <span class="keyword">int</span> d, c;   <span class="comment">// 德, 才</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">stu s[stuMAX];</div><div class="line"></div><div class="line"><span class="keyword">int</span> N, L, H;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">level</span><span class="params">( stu a )</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( a.d &gt;= H )&#123;</div><div class="line">        <span class="keyword">if</span>( a.c &gt;= H )  <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="keyword">else</span>    <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>( a.d &gt;= a.c )    <span class="keyword">return</span> <span class="number">3</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">( stu a, stu b )</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>( a.d + a.c != b.d + b.c )    <span class="keyword">return</span> a.d + a.c &gt; b.d + b.c;</div><div class="line">    <span class="keyword">if</span>( a.d != b.d )    <span class="keyword">return</span> a.d &gt; b.d;</div><div class="line">    <span class="keyword">return</span> a.no &lt; b.no;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">( stu a, stu b )</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> la = level( a );</div><div class="line">    <span class="keyword">int</span> lb = level( b );</div><div class="line">    <span class="keyword">if</span>( la != lb )  <span class="keyword">return</span> la &lt; lb;</div><div class="line">    <span class="keyword">return</span> judge( a, b );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d%d%d"</span>, &amp;N, &amp;L, &amp;H ) )&#123;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++ )&#123;</div><div class="line">            <span class="built_in">scanf</span>( <span class="string">"%d %d %d"</span>, &amp;s[i].no, &amp;s[i].d, &amp;s[i].c );</div><div class="line">            <span class="keyword">if</span>( s[i].d &lt; L || s[i].c &lt; L )&#123;</div><div class="line">                i--;</div><div class="line">                N--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        sort( s, s + N, cmp );</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%d\n"</span>, N );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++ )&#123;</div><div class="line">            <span class="built_in">printf</span>( <span class="string">"%d %d %d\n"</span>, s[i].no, s[i].d, s[i].c );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>一看我这么帅就是德才兼备，德才全尽啊！<br>请录取我！</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-09-10T16:41:19.000Z"><a href="/2017/09/11/字符串处理-2017-09-11-PAT-B-1014/">2017-09-11</a></time>
       
       
@@ -415,49 +465,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-04-19T16:21:16.000Z"><a href="/2017/04/20/数论-2017-04-20-codeforcesECR19A/">2017-04-20</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/04/20/数论-2017-04-20-codeforcesECR19A/">codeforces] ECR19 A. k-Factorization [数论]</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>链接：<a href="http://codeforces.com/contest/797/problem/A" target="_blank" rel="external">Codeforces Educational Codeforces Round 19 A. k-Factorization</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给你两个正整数 <code>n, k</code>。</p>
-<p>判断是否存在<code>k</code>个数相乘，使其乘积等于<code>n</code>。<br>如果不存在，输出<code>-1</code>。<br>如果存在，再以任何你喜欢的顺序输出这<code>k</code>个数。<br>（当然他们之间应以空格分隔）</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题目不难，应该有很多种方法解答这个问题。</p>
-<p>我直接说一下我的思路：</p>
-<p>既然要得到<code>k</code>个数相乘，那么这<code>k</code>个数肯定是尽量<strong>越小越好</strong>。<br>（比如<code>n</code>能被<code>6</code>整除，那尽量把<code>6</code>拆成<code>2</code>和<code>3</code>。）<br>这里面有点<strong>贪心</strong>的感觉。因为如果剩下的<code>n</code>越大，那满足<code>k</code>个数的概率也就越大。</p>
-<p>所以这道题我直接从<code>2</code>开始循环判断是否能够做<code>n</code>的因子。<br>如果可以就直接存下来，<code>n</code>除去当前因子，然后继续判断这个因子。<br>如果不行，那再判断他的后一个（<code>新因子 = 因子+1</code>）</p>
-<p>依次这样判断，直到找不到因子了或者已经够个数了为止。</p>
-<p>（当已经找到<code>k-1</code>个因子时，就可以直接把剩下的<code>n</code>当做最后一个数，而不用继续做下去了。）</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> n, k;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d %d"</span>, &amp;n, &amp;k ) )&#123;</div><div class="line">        <span class="built_in">vector</span>&lt; <span class="keyword">int</span> &gt; ans;  <span class="comment">//用来存这k个数</span></div><div class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;  <span class="comment">//保存当前因子个数</span></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++ )&#123;</div><div class="line">            <span class="keyword">if</span>( n % i == <span class="number">0</span> )&#123;   <span class="comment">//若能整除则存下来</span></div><div class="line">                <span class="keyword">if</span>( ++j == k )&#123; <span class="comment">//已经存够k-1个数，则直接存入剩下的n</span></div><div class="line">                    ans.push_back( n );</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                n /= i;</div><div class="line">                ans.push_back( i );</div><div class="line">                i--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>( j != k )    <span class="built_in">puts</span>( <span class="string">"-1"</span> );</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">int</span> sz = ans.size();</div><div class="line">            <span class="built_in">printf</span>( <span class="string">"%d"</span>, ans[ <span class="number">0</span> ] );</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sz; i++ )&#123;</div><div class="line">                <span class="built_in">printf</span>( <span class="string">" %d"</span>, ans[ i ] );</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>毕竟签到题，比较得简单，如果大家有更简单的方法可以留言或者Q我。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -485,7 +492,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">7</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
 </div>
 
 </aside>
