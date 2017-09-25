@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>PAT-B] 1016. 部分A+B [字符串处理] | Nezar&#39;s Nest</title>
+  <meta name="author" content="Nezar">
+  
+  <meta name="description" content="链接：1016. 部分A+B (15)
+题意分别给四个数：一个大数A和要找的每位数DA， 一个大数B和要找的每位数DB。然后将找出来的DA, DB分别组合成新的数PA, PB，加起来就是答案了。
+比如：A是1646451，然后DA是6，然后看A里面有两个6，拼起来PA就是66啦！
+同理再求出PB加起">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PAT-B] 1016. 部分A+B [字符串处理]"/>
+  <meta property="og:site_name" content="Nezar&#39;s Nest"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Nezar&#39;s Nest" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Nezar&#39;s Nest</a></h1>
+  <h2><a href="/">To get a foot in the door</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-09-25T03:21:38.000Z"><a href="/2017/09/25/字符串处理-2017-09-25-PAT-B-1016/">2017-09-25</a></time>
+      
+      
+  
+    <h1 class="title">PAT-B] 1016. 部分A+B [字符串处理]</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1016" target="_blank" rel="external">1016. 部分A+B (15)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>分别给四个数：<br>一个大数<code>A</code>和要找的每位数<code>DA</code>， 一个大数<code>B</code>和要找的每位数<code>DB</code>。然后将找出来的<code>DA, DB</code>分别组合成新的数<code>PA, PB</code>，加起来就是答案了。</p>
+<p>比如：<code>A</code>是<strong>1646451</strong>，然后<code>DA</code>是<strong>6</strong>，然后看<code>A</code>里面有两个<strong>6</strong>，拼起来<code>PA</code>就是<strong>66</strong>啦！</p>
+<p>同理再求出<code>PB</code>加起来就好了。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>这道题呢，由于已经给了<code>A, B</code>两个数的范围。所以直接用数来做也行，用字符串做也行。<br>之所以归类字符串处理，是因为他就是对每一位处理的来着。<br>总之用两种方法都可以。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 直接用大数存 A, B</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> A, B, PA, PB;</div><div class="line"><span class="keyword">int</span> DA, DB;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%lld %d %lld %d"</span>, &amp;A, &amp;DA, &amp;B, &amp;DB ) )&#123;</div><div class="line">        PA = <span class="number">0</span>, PB = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>( ; A &gt; <span class="number">0</span> ; A /= <span class="number">10</span> )&#123;</div><div class="line">            <span class="keyword">if</span>( A % <span class="number">10</span> == DA )  PA = PA * <span class="number">10</span> + DA;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>( ; B &gt; <span class="number">0</span> ; B /= <span class="number">10</span> )&#123;</div><div class="line">            <span class="keyword">if</span>( B % <span class="number">10</span> == DB )  PB = PB * <span class="number">10</span> + DB;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%lld\n"</span>, PA + PB );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 用字符串存 A, B</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">char</span> A[<span class="number">105</span>], B[<span class="number">105</span>];</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> PA, PB;</div><div class="line"><span class="keyword">int</span> DA, DB;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%s %d %s %d"</span>, A, &amp;DA, B, &amp;DB ) )&#123;</div><div class="line">        PA = <span class="number">0</span>, PB = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; A[i] != <span class="string">'\0'</span> ; i++ )&#123;</div><div class="line">            <span class="keyword">if</span>( A[i] - <span class="string">'0'</span> == DA )  PA = PA * <span class="number">10</span> + DA;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; B[i] != <span class="string">'\0'</span> ; i++ )&#123;</div><div class="line">            <span class="keyword">if</span>( B[i] - <span class="string">'0'</span> == DB )  PB = PB * <span class="number">10</span> + DB;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%lld\n"</span>, PA + PB );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>简单题嘛。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/暴力/">暴力</a>, <a href="/categories/暴力/模拟/">模拟</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/PAT-B/">PAT-B</a>, <a href="/tags/模拟/">模拟</a>
+  </div>
+
+        <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina"></a>
+    <a href="#" class="bds_tqq" data-cmd="tqq"></a>
+    <a href="#" class="bds_renren" data-cmd="renren"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin"></a>
+</div>
+
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "16"
+        },
+        "share": {},
+        "image": {
+            "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
+            "viewText": “分享到",
+            "viewSize": "16"
+        },
+        "selectShare": {
+            "bdContainerClass": null,
+            "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+        }
+    };
+    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://nezar657.github.io/2017/09/25/字符串处理-2017-09-25-PAT-B-1016/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:nezar657.github.io">
+  </form>
+</div>
+
+  <div class="widget tag">
+	<h3 class="title">友情链接</h3>
+	<ul class="entry">
+		<li><a href="http://blog.csdn.net/nezar" title="Nezar" target="_blank">我的 CSDN</a></li>
+		<li><a href="http://blog.csdn.net/whklhhhh" title="银耳" target="_blank">王子昂的 CSDN</a></li>
+	</ul>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Nezar
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js
+"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+</html>

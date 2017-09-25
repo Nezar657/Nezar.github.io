@@ -50,6 +50,46 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-09-25T03:21:38.000Z"><a href="/2017/09/25/字符串处理-2017-09-25-PAT-B-1016/">2017-09-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/09/25/字符串处理-2017-09-25-PAT-B-1016/">PAT-B] 1016. 部分A+B [字符串处理]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1016" target="_blank" rel="external">1016. 部分A+B (15)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>分别给四个数：<br>一个大数<code>A</code>和要找的每位数<code>DA</code>， 一个大数<code>B</code>和要找的每位数<code>DB</code>。然后将找出来的<code>DA, DB</code>分别组合成新的数<code>PA, PB</code>，加起来就是答案了。</p>
+<p>比如：<code>A</code>是<strong>1646451</strong>，然后<code>DA</code>是<strong>6</strong>，然后看<code>A</code>里面有两个<strong>6</strong>，拼起来<code>PA</code>就是<strong>66</strong>啦！</p>
+<p>同理再求出<code>PB</code>加起来就好了。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>这道题呢，由于已经给了<code>A, B</code>两个数的范围。所以直接用数来做也行，用字符串做也行。<br>之所以归类字符串处理，是因为他就是对每一位处理的来着。<br>总之用两种方法都可以。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 直接用大数存 A, B</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> A, B, PA, PB;</div><div class="line"><span class="keyword">int</span> DA, DB;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%lld %d %lld %d"</span>, &amp;A, &amp;DA, &amp;B, &amp;DB ) )&#123;</div><div class="line">        PA = <span class="number">0</span>, PB = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>( ; A &gt; <span class="number">0</span> ; A /= <span class="number">10</span> )&#123;</div><div class="line">            <span class="keyword">if</span>( A % <span class="number">10</span> == DA )  PA = PA * <span class="number">10</span> + DA;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>( ; B &gt; <span class="number">0</span> ; B /= <span class="number">10</span> )&#123;</div><div class="line">            <span class="keyword">if</span>( B % <span class="number">10</span> == DB )  PB = PB * <span class="number">10</span> + DB;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%lld\n"</span>, PA + PB );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 用字符串存 A, B</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">char</span> A[<span class="number">105</span>], B[<span class="number">105</span>];</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> PA, PB;</div><div class="line"><span class="keyword">int</span> DA, DB;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%s %d %s %d"</span>, A, &amp;DA, B, &amp;DB ) )&#123;</div><div class="line">        PA = <span class="number">0</span>, PB = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; A[i] != <span class="string">'\0'</span> ; i++ )&#123;</div><div class="line">            <span class="keyword">if</span>( A[i] - <span class="string">'0'</span> == DA )  PA = PA * <span class="number">10</span> + DA;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; B[i] != <span class="string">'\0'</span> ; i++ )&#123;</div><div class="line">            <span class="keyword">if</span>( B[i] - <span class="string">'0'</span> == DB )  PB = PB * <span class="number">10</span> + DB;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%lld\n"</span>, PA + PB );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>简单题嘛。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-09-21T07:54:57.000Z"><a href="/2017/09/21/暴力-模拟-2017-09-21-PAT-B-1015/">2017-09-21</a></time>
       
       
@@ -422,49 +462,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-07-26T15:36:55.000Z"><a href="/2017/07/26/暴力-模拟-2017-07-26-PAT-B-1006/">2017-07-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/07/26/暴力-模拟-2017-07-26-PAT-B-1006/">PAT-B] 1006. 换个格式输出整数 [模拟]</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1006" target="_blank" rel="external">1006. 换个格式输出整数 (15)</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给一个小于1000的正整数，按照以下格式输出：</p>
-<ol>
-<li>个位数：从<code>1</code>开始按顺序输出直到<strong>等于</strong>个位数为止<br>（如个位数为<code>7</code>，则输出<code>1234567</code>）</li>
-<li>十位数：按十位数的大小输出相应数量的 <strong>S</strong></li>
-<li>百位数：按百位数的大小输出相应数量的 <strong>B</strong></li>
-</ol>
-<p>则，如果给一个两位数<code>43</code>，我们就要输出<code>SSSS123</code>。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题意比较简单，按照思路写下来就好了。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;n ) )&#123;</div><div class="line">        <span class="keyword">int</span> b, s, g;   <span class="comment">// 百, 十, 个</span></div><div class="line">        g = n % <span class="number">10</span>; <span class="comment">// 存放个位数</span></div><div class="line">        n /= <span class="number">10</span>;</div><div class="line">        s = n % <span class="number">10</span>; <span class="comment">// 存放十位数</span></div><div class="line">        n /= <span class="number">10</span>;</div><div class="line">        b = n % <span class="number">10</span>; <span class="comment">// 存放百位数</span></div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; b; i++ )</div><div class="line">            <span class="built_in">putchar</span>( <span class="string">'B'</span> );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s; i++ )</div><div class="line">            <span class="built_in">putchar</span>( <span class="string">'S'</span> );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g; i++ )</div><div class="line">            <span class="built_in">printf</span>( <span class="string">"%d"</span>, i + <span class="number">1</span> );</div><div class="line">        <span class="built_in">puts</span>( <span class="string">""</span> );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>大水题。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -492,7 +489,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">7</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
 </div>
 
 </aside>
