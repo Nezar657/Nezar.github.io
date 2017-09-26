@@ -50,6 +50,50 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-09-26T02:32:34.000Z"><a href="/2017/09/26/暴力-模拟-2017-09-26-PAT-B-1017/">2017-09-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/09/26/暴力-模拟-2017-09-26-PAT-B-1017/">PAT-B] 1017. A除以B [模拟]</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1017" target="_blank" rel="external">1017. A除以B (20)</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给两个数<code>A, B</code>。</p>
+<p>其中，<code>A</code>为<strong>长度不超过1000位</strong>的大数（正整数）。<code>B</code>为<strong>长度为1</strong>的正整数</p>
+<p>然后求出 $A/B$ 的商$Q$和余数$R$。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>首先看到<code>A</code>这么长用<code>long double</code>也存不下，立即用<strong>字符串存储</strong>。<br>同理，<code>B</code>只有一位，那求出来的商<code>Q</code>也很长，也必须使用<strong>字符串</strong>。</p>
+<p>然后就是要解决怎么除的问题了。</p>
+<p>这个问题呢，其实不难。直接<strong>模拟做除法的过程</strong>就可以了。<br>没想起来的话可以自己在草稿本上写一写。</p>
+<p>比如被除数<code>A</code>为<code>1234</code>， 除数<code>B</code>为<code>3</code>，我们可以得到下面这样的过程。</p>
+<p><del>（哇，这个Latex怎么写除法啊）</del></p>
+<p>总之，在草稿本上写一写应该就出来了！</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">char</span> A[<span class="number">1005</span>], Q[<span class="number">1005</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> B;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%s %d"</span>, A, &amp;B ) )&#123;</div><div class="line">        <span class="keyword">if</span>( B == <span class="number">1</span> )&#123;</div><div class="line">            <span class="built_in">printf</span>( <span class="string">"%s 0\n"</span>, A );</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> R = <span class="number">0</span>, i = <span class="number">0</span>, j = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>( A[<span class="number">0</span>] - <span class="string">'0'</span> &lt; B )&#123;</div><div class="line">            R = ( A[<span class="number">0</span>] - <span class="string">'0'</span> ) % B;</div><div class="line">            Q[<span class="number">0</span>] = <span class="string">'0'</span>;</div><div class="line">            i++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>( ; A[i] != <span class="string">'\0'</span>; i++ )&#123;</div><div class="line">            R = R * <span class="number">10</span> + A[i] - <span class="string">'0'</span>;</div><div class="line">            <span class="keyword">if</span>( R &lt; B )&#123;</div><div class="line">                Q[j++] = <span class="string">'0'</span>;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">            Q[j++] = R / B + <span class="string">'0'</span>;</div><div class="line">            R = R % B;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>( j ) Q[j] = <span class="string">'\0'</span>;</div><div class="line">        <span class="keyword">else</span>    Q[j + <span class="number">1</span>] = <span class="string">'\0'</span>;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%s %d\n"</span>, Q, R );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>模拟除法。其实挺简单的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-09-25T03:21:38.000Z"><a href="/2017/09/25/字符串处理-2017-09-25-PAT-B-1016/">2017-09-25</a></time>
       
       
@@ -418,50 +462,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-07-27T12:57:56.000Z"><a href="/2017/07/27/数论-2017-07-27-PAT-B-1007/">2017-07-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/07/27/数论-2017-07-27-PAT-B-1007/">PAT-B] 1007. 素数对猜想 [数论]</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>链接：<a href="https://www.patest.cn/contests/pat-b-practise/1007" target="_blank" rel="external">1007. 素数对猜想 (20)</a></p>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>任意给一个小于$10^5$的正整数N，并要求在$( 0, N )$这个范围内，<br>找出满足以下条件的<code>数对</code>的总数：</p>
-<ol>
-<li>两个数均是<strong>素数</strong></li>
-<li>两个数之间相差<code>2</code></li>
-</ol>
-<p>样例中的<code>N</code>为<code>20</code>。<br>满足条件的数对为：<br><code>3, 5</code>， <code>5, 7</code>， <code>11, 13</code>， <code>17, 19</code><br>总计<code>4</code>对， 则输出<code>4</code>。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>题意中要求判断的数均为<strong>素数</strong>，而且给的<code>N</code>也并不大。所以直接暴力打表，把所有的素数存到数组中再处理也挺简单的。</p>
-<p>题目要求的条件是<strong>相差为2</strong>，对于素数来说除了<code>2</code>之外就没有其他偶数了，所以这里我们可以直接对<strong>相邻的素数</strong>进行判断，如果相邻的还不行其他的也不用考虑了。</p>
-<p>PS：如果是<strong>其他的OJ</strong>说明输入多组样例的话，把每次的结果存下来给下面的样例使用会快很多哦。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</div><div class="line"></div><div class="line"><span class="keyword">int</span> prime[<span class="number">100015</span>];  <span class="comment">// 增序存放素数</span></div><div class="line"><span class="keyword">int</span> flag[<span class="number">100015</span>];   <span class="comment">// 标记这个下标对应的数是否是素数</span></div><div class="line"><span class="keyword">int</span> idx = <span class="number">0</span>;        <span class="comment">// 素数数组的下标</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">( <span class="keyword">int</span> n )</span></span>&#123;</div><div class="line">    <span class="comment">// 初始化两个数组为 0</span></div><div class="line">    <span class="built_in">memset</span>( prime, <span class="number">0</span>, <span class="keyword">sizeof</span>( prime ) );</div><div class="line">    <span class="built_in">memset</span>( flag, <span class="number">0</span>, <span class="keyword">sizeof</span>( flag ) );</div><div class="line">    <span class="keyword">for</span>( LL i = <span class="number">2</span>; i &lt; n + <span class="number">10</span>; i++ )&#123;</div><div class="line">        <span class="keyword">if</span>( flag[i] )   <span class="keyword">continue</span>;   <span class="comment">// 非素数则不处理</span></div><div class="line">        prime[ idx++ ] = i;     <span class="comment">// 素数存入素数数组</span></div><div class="line">        <span class="keyword">for</span>( LL j = i * i; j &lt; <span class="number">100002</span>; j += i ) <span class="comment">// 将其倍数均标记为合数</span></div><div class="line">            flag[j] = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> N;</div><div class="line">    <span class="keyword">while</span>( ~<span class="built_in">scanf</span>( <span class="string">"%d"</span>, &amp;N ) )&#123;</div><div class="line">        init( N );</div><div class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; prime[i] &lt;= N; i++ )&#123;</div><div class="line">            <span class="comment">// 依次遍历相邻的素数 看是否满足条件</span></div><div class="line">            <span class="keyword">if</span>( prime[i] - prime[i - <span class="number">1</span>] == <span class="number">2</span> )</div><div class="line">                num++;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>( <span class="string">"%d\n"</span>, num );</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>处理出素数的方法有很多，可以多尝试尝试。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -489,7 +489,7 @@
   
 <div class="widget tag">
   <h3 class="title">分类</h3>
-     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
+     <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/字符串处理/">字符串处理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数论/">数论</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/">暴力</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/暴力/模拟/">模拟</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/">杂</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/杂/blog/">blog</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂/个人/">个人</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/查找/">查找</a><span class="category-list-count">2</span></li></ul> 
 </div>
 
 </aside>
